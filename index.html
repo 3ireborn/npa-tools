@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NPA SMART ENGINE V2 | 3IREBORN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #020617; color: #e2e8f0; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .gradient-text { background: linear-gradient(90deg, #38bdf8, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold text-center mb-8">🚀 <span class="gradient-text">NPA SMART ENGINE V2</span></h1>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Form -->
+        <div class="glass p-6 rounded-2xl space-y-4">
+            <div>
+                <label class="text-sm text-slate-400">Topik Khusus</label>
+                <select id="topic" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 mt-1 text-slate-200">
+                    <option value="3iReborn">3iReborn (Bisnis & Investasi)</option>
+                    <option value="Istikmal Syariah">Istikmal Syariah (Proteksi)</option>
+                    <option value="Cruise">Cruise (Kapal Pesiar)</option>
+                    <option value="Melali Bali">Melali Bali (Trip Eksklusif)</option>
+                </select>
+            </div>
+            <div>
+                <label class="text-sm text-slate-400">Jumlah Scene</label>
+                <select id="sceneCount" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 mt-1 text-slate-200">
+                    <option value="3">3 Scene</option>
+                    <option value="5">5 Scene</option>
+                </select>
+            </div>
+            <button onclick="generate()" class="w-full py-4 bg-sky-600 hover:bg-sky-500 rounded-xl font-bold text-white transition transform hover:scale-[1.01]">GENERATE PROMPT</button>
+        </div>
+
+        <!-- Output -->
+        <div class="glass p-6 rounded-2xl flex flex-col">
+            <textarea id="output" readonly class="w-full flex-grow bg-slate-950 border border-slate-700 rounded-lg p-4 font-mono text-xs text-sky-200" style="min-height: 300px;" placeholder="Hasil prompt muncul di sini..."></textarea>
+            <button onclick="copyToClipboard()" class="mt-4 bg-slate-800 py-2 rounded-lg hover:bg-slate-700 transition">Copy Prompt</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const topicData = {
+        "3iReborn": [
+            "3iReborn adalah solusi cerdas membangun aset masa depan tanpa harus kerja keras selamanya.",
+            "Sistem 3iReborn dirancang agar keuangan keluarga jauh lebih tenang dan terproteksi.",
+            "Bergabung di 3iReborn berarti Anda memilih jalan pintas menuju kebebasan waktu yang sesungguhnya.",
+            "Jangan biarkan inflasi menggerus tabungan Anda; biarkan 3iReborn bekerja melipatgandakan aset Anda.",
+            "Wujudkan masa depan yang mandiri dan berkecukupan hanya dengan satu keputusan hari ini."
+        ],
+        "Istikmal Syariah": [
+            "Istikmal Syariah memberikan ketenangan hati dengan perlindungan yang sesuai kaidah Islam.",
+            "Pilihan paling tepat bagi keluarga yang ingin merencanakan masa depan tanpa riba.",
+            "Tinggalkan segala keraguan, karena sistem Istikmal Syariah sudah tervalidasi dan sesuai fatwa.",
+            "Keberkahan adalah tujuan utama; pastikan setiap rupiah yang Anda kumpulkan terjaga dengan syariah.",
+            "Lindungi orang-orang tersayang dengan langkah yang tepat dan penuh keberkahan."
+        ],
+        "Cruise": [
+            "Ingin jalan-jalan ke luar negeri gratis? Program Cruise adalah tiket emas Anda.",
+            "Bayangkan menikmati kemewahan kapal pesiar bersama keluarga dari hasil pasif income.",
+            "Program Cruise 3iReborn dirancang untuk mereka yang berani bermimpi petualangan kelas dunia.",
+            "Ini bukan sekadar liburan, tapi bukti nyata bahwa kerja keras Anda membuahkan hasil mewah.",
+            "Dapatkan tiket petualangan impian Anda sekarang juga bersama ekosistem 3iReborn."
+        ],
+        "Melali Bali": [
+            "Nikmati keindahan pulau dewata Bali dengan fasilitas eksklusif kelas satu.",
+            "Program Melali Bali dirancang khusus untuk memberikan kenyamanan total bagi mitra berprestasi.",
+            "Jangan hanya bermimpi, wujudkan perjalanan impian ke Bali bersama tim profesional kami.",
+            "Setiap momen di Bali akan menjadi kenangan tak terlupakan bersama komunitas hebat.",
+            "Segera raih kualifikasinya dan nikmati keindahan Bali secara cuma-cuma."
+        ]
+    };
+
+    function generate() {
+        const topic = document.getElementById("topic").value;
+        const sceneCount = parseInt(document.getElementById("sceneCount").value);
+        
+        let output = `TITLE: ${topic} - NPA SMART SYSTEM\n\n`;
+
+        for (let i = 1; i <= sceneCount; i++) {
+            let narasi = topicData[topic][i - 1];
+            output += `SCENE ${i} (8 detik):\nVisual sinematik berkualitas tinggi tentang ${topic}.\nNarasi: "${narasi}"\n\n`;
+        }
+
+        output += `VISUAL STYLE: High-end cinematic, professional color grading.\n`;
+        output += `CAMERA: Smooth stabilized motion, shallow depth of field.\n`;
+        output += `AUDIO: Male, deep, authoritative voice. Background: cinematic orchestral underscore.\n`;
+        output += `BRANDING: Generated by NPA SMART SYSTEM — Powered by 3IREBORN`;
+        
+        document.getElementById('output').value = output;
+    }
+
+    function copyToClipboard() {
+        const txt = document.getElementById('output');
+        txt.select();
+        document.execCommand('copy');
+        alert("Prompt berhasil disalin, Ndan!");
+    }
+</script>
+</body>
+</html>
