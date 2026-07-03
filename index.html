@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NPA SMART ENGINE V4 | VEO EDITION</title>
+    <title>NPA SMART ENGINE V3.i | 3IREBORN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background: #020617; color: #e2e8f0; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
@@ -19,7 +19,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #10b981);
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -27,20 +27,25 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 pb-20">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
         <div class="text-center mb-10">
             <h1 class="text-4xl md:text-5xl font-black mb-2 tracking-tight">
-                🎬 <span class="gradient-text">NPA SMART ENGINE V4</span>
+                🔥 <span class="gradient-text">NPA SMART ENGINE V3.i</span>
             </h1>
-            <p class="text-lg text-slate-400 font-semibold">Veo 3 Optimized Workflow</p>
+            <p class="text-xl text-slate-300 font-bold mb-3">( Branding 3IReborn )</p>
+            <div class="inline-block px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-mono tracking-widest uppercase">
+                Jumat Berkah Edition - Veo 3 Optimized
+            </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
+            <!-- Left Column: Input Form -->
             <div class="lg:col-span-4 space-y-6">
                 <div class="glass-panel p-6 rounded-2xl shadow-xl">
-                    <h2 class="text-lg font-bold text-blue-400 mb-4 flex items-center gap-2">
-                        <i class="fas fa-cogs"></i> Setup Video
+                    <h2 class="text-lg font-bold text-amber-400 mb-4 flex items-center gap-2">
+                        <i class="fas fa-sliders-h"></i> Konfigurasi Video
                     </h2>
                     
                     <div class="space-y-4">
@@ -56,122 +61,175 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Aspect Ratio (Format)</label>
-                            <select id="ratio" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200">
-                                <option value="9:16">9:16 (Reels/TikTok/Shorts)</option>
-                                <option value="16:9">16:9 (YouTube/Landscape)</option>
+                            <label class="block text-sm font-medium text-slate-400 mb-1">Background / Latar</label>
+                            <select id="background" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200">
+                                <option value="Studio podcast profesional dengan lighting dramatis">Studio Podcast Profesional</option>
+                                <option value="Kantor eksekutif modern dengan pemandangan kota">Kantor Eksekutif Modern</option>
+                                <option value="Alam pedesaan yang asri dan sejuk">Alam Pedesaan Asri</option>
+                                <option value="Cafe aesthetic dengan lampu hangat">Cafe Aesthetic</option>
+                                <option value="Ruang keluarga yang hangat dan nyaman">Ruang Keluarga Hangat</option>
+                                <option value="Pemandangan dek kapal pesiar / laut lepas">Dek Kapal Pesiar / Laut</option>
+                                <option value="Resort mewah di Bali">Resort Mewah Bali</option>
+                                <option value="Dapur tradisional yang bersih dan rapi">Dapur Tradisional (Khusus UMKM)</option>
+                                <option value="Perpustakaan klasik dengan rak kayu">Perpustakaan Klasik</option>
+                                <option value="Taman tropis dengan cahaya matahari pagi">Taman Tropis</option>
+                                <option value="Latar belakang bokeh sinematik abstrak">Abstrak Sinematik (Bokeh)</option>
                             </select>
                         </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-slate-400 mb-1">Jumlah Scene</label>
-                            <select id="sceneCount" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200">
-                                <option value="3">3 Scene</option>
-                                <option value="5">5 Scene</option>
-                            </select>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400 mb-1">Aspect Ratio</label>
+                                <select id="ratio" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200">
+                                    <option value="9:16">9:16 (Reels/TikTok)</option>
+                                    <option value="16:9">16:9 (YouTube)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-400 mb-1">Jumlah Scene</label>
+                                <select id="sceneCount" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200">
+                                    <option value="3">3 Scene</option>
+                                    <option value="5">5 Scene</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Section: Foto Upload -->
+                <div class="glass-panel p-6 rounded-2xl shadow-xl">
+                    <h2 class="text-lg font-bold text-sky-400 mb-4 flex items-center gap-2">
+                        <i class="fas fa-image"></i> Referensi (Opsional)
+                    </h2>
+                    <div class="flex items-center justify-center w-full">
+                        <label for="imageInput" class="flex flex-col items-center justify-center w-full h-28 border-2 border-slate-700 border-dashed rounded-lg cursor-pointer bg-slate-900/50 hover:bg-slate-800 transition-colors">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <i class="fas fa-cloud-upload-alt text-2xl text-slate-500 mb-2"></i>
+                                <p class="text-xs text-slate-400"><span class="font-semibold">Upload wajah/produk</span></p>
+                            </div>
+                            <input id="imageInput" type="file" accept="image/*" class="hidden" onchange="previewImage(event)" />
+                        </label>
+                    </div>
+                    <div id="previewContainer" class="hidden relative rounded-lg overflow-hidden border border-slate-700 mt-4">
+                        <div class="absolute top-2 left-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded">Foto Aktif</div>
+                        <img id="preview" class="w-full h-auto object-cover max-h-[150px]">
+                    </div>
+                </div>
+
                 <button onclick="showBankIde()" class="w-full py-3 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition">
-                    <i class="fas fa-lightbulb text-yellow-400"></i> Bank Ide Konten (Untuk Mitra)
+                    <i class="fas fa-lightbulb text-yellow-400"></i> Bank Ide Konten
                 </button>
 
-                <button onclick="generate()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 text-white font-black text-lg rounded-xl shadow-lg transform transition hover:scale-[1.02] flex items-center justify-center gap-2">
-                    <i class="fas fa-magic"></i> GENERATE PROMPT
+                <button onclick="generate()" class="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-black text-lg rounded-xl shadow-lg transform transition hover:scale-[1.02] flex items-center justify-center gap-2">
+                    <i class="fas fa-bolt"></i> GENERATE PROMPT
                 </button>
             </div>
 
+            <!-- Right Column: Output Blocks -->
             <div class="lg:col-span-8">
                 <div id="outputContainer" class="space-y-6">
                     <div class="glass-panel p-10 rounded-2xl flex flex-col items-center justify-center text-slate-500 h-full border border-dashed border-slate-700">
                         <i class="fas fa-photo-video text-4xl mb-3 opacity-50"></i>
-                        <p>Klik Generate untuk memunculkan blok prompt per scene.</p>
+                        <p class="text-center">Klik <b>GENERATE</b> untuk menyusun prompt.<br>Copy per scene dan paste ke Veo 3.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Modal Bank Ide -->
     <div id="bankIdeModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4">
         <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-yellow-400">💡 Bank Ide Konten</h3>
+                <h3 class="text-xl font-bold text-yellow-400">💡 Bank Ide Konten (Pola Jitu)</h3>
                 <button onclick="closeBankIde()" class="text-slate-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
             </div>
-            <p class="text-sm text-slate-300 mb-4">Mitra gabut? Copy "Prompt Sakti" ini dan paste ke Gemini/ChatGPT untuk dapat puluhan ide narasi baru:</p>
-            <textarea id="promptSakti" readonly class="w-full h-32 bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-green-300 resize-none">"Buatkan saya 5 kalimat narasi pendek (durasi baca 8 detik per kalimat) dengan gaya bahasa profesional dan emosional. Topiknya tentang [ISI TOPIK, misal: Pentingnya proteksi income dengan 3iReborn]. Buat agar cocok dibacakan sebagai voice-over video sinematik."</textarea>
+            <p class="text-sm text-slate-300 mb-4">Copy "Prompt Sakti" ini dan paste ke ChatGPT/Gemini untuk membuat naskah video berstruktur Hook - Masalah - Solusi:</p>
+            <textarea id="promptSakti" readonly class="w-full h-40 bg-slate-950 border border-slate-700 rounded-lg p-3 text-sm text-emerald-300 resize-none">"Buatkan saya naskah video pendek (total 5 scene, masing-masing durasi baca 8 detik) dengan struktur: Scene 1 (Hook), Scene 2 & 3 (Masalah), Scene 4 & 5 (Solusi). Gaya bahasa profesional dan emosional. Topik tentang: [ISI TOPIK, misal: Pentingnya proteksi income dengan Istikmal Syariah 3iReborn]. Buat agar cocok dibacakan sebagai voice-over video sinematik. Format berikan per scene."</textarea>
             <button onclick="copyBankIde()" class="mt-4 w-full bg-blue-600 py-3 rounded-lg font-bold hover:bg-blue-500 transition">Copy Prompt Sakti</button>
         </div>
     </div>
 
     <script>
+        let hasRef = false;
+
+        function previewImage(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById("preview").src = URL.createObjectURL(file);
+                document.getElementById("previewContainer").classList.remove('hidden');
+                hasRef = true;
+            }
+        }
+
         const topicData = {
             "3iReborn": [
-                "3iReborn adalah solusi cerdas membangun aset masa depan tanpa harus kerja keras selamanya.",
-                "Sistem ini dirancang agar keuangan keluarga jauh lebih tenang dan terproteksi dari inflasi.",
-                "Bergabung di 3iReborn berarti Anda memilih jalan pintas menuju kebebasan waktu.",
-                "Biarkan sistem melipatgandakan aset selagi Anda menikmati waktu bersama keluarga.",
-                "Wujudkan masa depan mandiri hanya dengan satu keputusan kecil hari ini."
+                "Banyak orang sibuk bekerja, tapi lupa membangun mesin uangnya sendiri.",
+                "Sistem 3iReborn dirancang agar keuangan Anda tetap berjalan meski Anda sedang beristirahat.",
+                "Bergabung di 3iReborn adalah langkah cerdas menuju kebebasan waktu yang sesungguhnya.",
+                "Biarkan sistem yang melipatgandakan aset, sementara Anda menikmati momen berharga bersama keluarga.",
+                "Ambil keputusan hari ini, dan wujudkan masa depan mandiri tanpa batas."
             ],
             "Istikmal Syariah": [
-                "Istikmal Syariah memberikan ketenangan hati dengan perlindungan yang sesuai kaidah Islam.",
-                "Pilihan paling cerdas bagi keluarga yang ingin merencanakan masa depan tanpa riba.",
-                "Tinggalkan keraguan, sistem ini sudah tervalidasi dan sesuai fatwa dewan syariah.",
-                "Pastikan setiap rupiah yang dikumpulkan membawa kebaikan dunia dan akhirat.",
-                "Lindungi orang-orang tersayang dengan langkah yang tepat dan penuh keberkahan."
+                "Banyak yang mencari penghasilan, tapi sedikit yang benar-benar melindungi penghasilannya.",
+                "Saat musibah datang, bukan hanya kesehatan yang diuji, tapi juga kemampuan keluarga untuk bertahan.",
+                "Istikmal Syariah hadir memberikan ketenangan hati dengan perlindungan sesuai kaidah Islam.",
+                "Tinggalkan keraguan, sistem ini tervalidasi dan memastikan setiap rupiah Anda penuh keberkahan.",
+                "Lindungi orang tersayang sekarang, karena masa depan mereka adalah tanggung jawab kita hari ini."
             ],
             "Cruise": [
-                "Ingin jalan-jalan ke luar negeri gratis? Program Cruise adalah tiket emas Anda.",
-                "Nikmati kemewahan kapal pesiar bersama keluarga dari hasil pasif income.",
-                "Program ini dirancang untuk mereka yang berani bermimpi dan mengambil aksi nyata.",
-                "Ini bukti bahwa kerja cerdas Anda membuahkan hasil yang mewah dan elegan.",
-                "Dapatkan tiket petualangan kelas dunia Anda bersama ekosistem bisnis kami."
+                "Pernahkah Anda membayangkan liburan mewah tanpa harus memikirkan tagihan?",
+                "Program Cruise 3iReborn bukan sekadar mimpi, ini adalah tiket emas bagi Anda yang berani bertindak.",
+                "Nikmati kemewahan kapal pesiar bersama orang tercinta, murni dari hasil pasif income Anda.",
+                "Ini adalah bukti nyata bahwa kerja cerdas dan konsistensi selalu membuahkan hasil yang elegan.",
+                "Mari bergabung, kemas koper Anda, dan bersiaplah untuk petualangan kelas dunia."
             ],
             "Melali Bali": [
-                "Nikmati keindahan pulau dewata Bali dengan fasilitas eksklusif kelas satu.",
-                "Program Melali Bali dirancang khusus untuk kenyamanan total mitra berprestasi.",
-                "Wujudkan perjalanan impian Anda ke Bali tanpa membebani kantong pribadi.",
-                "Setiap momen di Bali akan menjadi bukti nyata kesuksesan jaringan Anda.",
-                "Raih kualifikasinya, kemas koper Anda, dan rayakan kemenangan di Bali."
+                "Waktu terus berjalan, kapan terakhir kali Anda memberikan hadiah istimewa untuk diri sendiri?",
+                "Program Melali Bali dirancang khusus untuk memanjakan mitra yang berdedikasi tinggi.",
+                "Nikmati keindahan pulau dewata dengan fasilitas eksklusif tanpa membebani kantong pribadi.",
+                "Setiap momen di Bali akan menjadi bukti nyata kesuksesan jaringan dan kerja keras Anda.",
+                "Kejar kualifikasinya sekarang, dan mari kita rayakan kemenangan bersama di Bali."
             ],
             "Nasi Bakar Mama Asha": [
-                "Aroma rempah yang dibakar sempurna, menggugah selera sejak gigitan pertama.",
-                "Perpaduan bumbu rahasia keluarga dan suwiran lauk yang melimpah ruah.",
-                "Dibungkus daun pisang, mengunci kelezatan autentik nusantara di setiap porsinya.",
-                "Solusi makan siang praktis dan nikmat untuk menemani hari sibuk Anda.",
-                "Rasakan sensasi gurih pedasnya sekarang, awas ketagihan dari suapan pertama!"
+                "Lapar di tengah kesibukan, tapi butuh makanan yang praktis dan menggugah selera?",
+                "Nasi Bakar Mama Asha hadir dengan aroma rempah yang dibakar sempurna, menggoda sejak gigitan pertama.",
+                "Perpaduan bumbu rahasia keluarga dan suwiran lauk melimpah, dibungkus daun pisang yang harum.",
+                "Solusi makan siang nikmat, mengenyangkan, dan mengunci kelezatan autentik nusantara.",
+                "Pesan sekarang dan rasakan sensasi gurih pedasnya, awas ketagihan dari suapan pertama!"
             ]
         };
 
         function generate() {
             const topic = document.getElementById("topic").value;
             const ratio = document.getElementById("ratio").value;
+            const background = document.getElementById("background").value;
             const sceneCount = parseInt(document.getElementById("sceneCount").value);
             const container = document.getElementById("outputContainer");
             
-            container.innerHTML = ''; // Bersihkan container
+            container.innerHTML = ''; 
+
+            let refText = hasRef ? "Subject perfectly matches the provided reference image. " : "";
 
             for (let i = 1; i <= sceneCount; i++) {
                 let narasi = topicData[topic][i - 1];
                 
-                // Susun prompt khusus Veo 3
-                let promptText = `Cinematic portrait shot, ${topic} theme, highly detailed, professional commercial style.\n`;
+                let promptText = `Cinematic commercial video, ${topic} theme. ${refText}\n`;
                 promptText += `Aspect Ratio: ${ratio}\n`;
-                promptText += `Action: Smooth gimbal tracking, natural movement. Keep hands naturally resting or out of frame to avoid AI distortion.\n`;
-                promptText += `Camera: 85mm lens, f/1.8, shallow depth of field, sharp focus.\n`;
-                promptText += `Lighting: Rembrandt lighting, volumetric haze, 4k resolution.\n`;
+                promptText += `Setting/Background: ${background}.\n`;
+                promptText += `Action: Smooth gimbal tracking, natural subtle movement. Keep hands naturally resting or completely out of frame to avoid AI distortion.\n`;
+                promptText += `Camera: 85mm lens, f/1.8, shallow depth of field, sharp focus on subject.\n`;
+                promptText += `Lighting: Rembrandt lighting, volumetric haze, 4k ultra-photorealistic.\n`;
                 promptText += `Audio: Dialogue in Indonesian speaking: "${narasi}"`;
 
-                // Buat elemen blok per scene
                 const block = document.createElement('div');
-                block.className = "glass-panel p-5 rounded-xl relative group transition-all hover:border-blue-500/50";
+                block.className = "glass-panel p-5 rounded-xl relative group transition-all hover:border-amber-500/50";
                 
                 block.innerHTML = `
                     <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-bold text-blue-400">🎬 Scene ${i}</h3>
-                        <button onclick="copyText('prompt_${i}', this)" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition">
-                            <i class="far fa-copy"></i> Salin
+                        <h3 class="font-bold text-amber-400">🎬 Scene ${i}</h3>
+                        <button onclick="copyText('prompt_${i}', this)" class="bg-amber-600 hover:bg-amber-500 text-white text-xs px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition shadow-lg">
+                            <i class="far fa-copy"></i> Salin Scene ${i}
                         </button>
                     </div>
                     <textarea id="prompt_${i}" readonly class="w-full h-40 bg-slate-950 border border-slate-700/50 rounded-lg p-3 text-sm text-emerald-300 resize-none focus:outline-none">${promptText}</textarea>
@@ -187,25 +245,24 @@
             document.execCommand('copy');
             
             const originalHTML = btnElement.innerHTML;
-            btnElement.innerHTML = '<i class="fas fa-check"></i> Disalin';
-            btnElement.classList.replace('bg-blue-600', 'bg-green-600');
-            btnElement.classList.replace('hover:bg-blue-500', 'hover:bg-green-500');
+            btnElement.innerHTML = '<i class="fas fa-check"></i> Disalin!';
+            btnElement.classList.replace('bg-amber-600', 'bg-green-600');
+            btnElement.classList.replace('hover:bg-amber-500', 'hover:bg-green-500');
             
             setTimeout(() => {
                 btnElement.innerHTML = originalHTML;
-                btnElement.classList.replace('bg-green-600', 'bg-blue-600');
-                btnElement.classList.replace('hover:bg-green-500', 'hover:bg-blue-500');
+                btnElement.classList.replace('bg-green-600', 'bg-amber-600');
+                btnElement.classList.replace('hover:bg-green-500', 'hover:bg-amber-500');
             }, 2000);
         }
 
-        // Modal Logic
         function showBankIde() { document.getElementById('bankIdeModal').classList.replace('hidden', 'flex'); }
         function closeBankIde() { document.getElementById('bankIdeModal').classList.replace('flex', 'hidden'); }
         function copyBankIde() {
             const txt = document.getElementById('promptSakti');
             txt.select();
             document.execCommand('copy');
-            alert("Prompt Sakti disalin! Silakan paste ke Gemini/ChatGPT.");
+            alert("Prompt Sakti disalin! Silakan bagikan ke mitra untuk dipakai di ChatGPT.");
         }
     </script>
 </body>
