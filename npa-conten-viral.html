@@ -5,39 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NPA Content Viral Pro</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     :root {
-      /* Dark Theme Backgrounds */
       --bg-dark: #0f111a;
       --bg-gradient: linear-gradient(180deg, #131826 0%, #0a0d14 100%);
-      
-      /* Light Panel Colors */
       --panel-light: #ffffff;
       --card-bg: #f8fafc;
       --border-light: #e2e8f0;
-      
-      /* Text Colors */
       --text-dark: #1e293b;
       --text-muted: #64748b;
       --text-label: #334155;
       --text-light: #f8fafc;
-      
-      /* Accents & Glow */
       --glow-pink: rgba(236, 72, 153, 0.6);
       --glow-purple: rgba(168, 85, 247, 0.6);
       --pink-border: #f472b6;
       --pink-bg: #fdf2f8;
-      
-      /* Buttons */
       --btn-primary: linear-gradient(90deg, #f43f5e, #f97316);
       --btn-blue: linear-gradient(90deg, #3b82f6, #6366f1);
       --btn-gold: linear-gradient(90deg, #f59e0b, #fbbf24);
       --btn-green: linear-gradient(90deg, #10b981, #34d399);
       --btn-dark: #334155;
-      
       --shadow-soft: 0 4px 12px rgba(0,0,0,0.05);
       --radius-lg: 24px;
       --radius-md: 14px;
@@ -52,134 +40,41 @@
       min-height: 100vh;
     }
 
-    .hero {
-      text-align: center;
-      padding: 30px 20px 40px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .brand-title {
-      margin: 0;
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      line-height: 1.2;
-      text-transform: uppercase;
-    }
-
+    .hero { text-align: center; padding: 30px 20px 40px; max-width: 900px; margin: 0 auto; }
+    .brand-title { margin: 0; font-size: 42px; font-weight: 900; letter-spacing: 1px; line-height: 1.2; text-transform: uppercase; }
+    
     .text-grad-1 { background: linear-gradient(90deg, #f43f5e, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
     .text-grad-2 { background: linear-gradient(90deg, #a855f7, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
     .text-grad-3 { background: linear-gradient(90deg, #3b82f6, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
 
-    .brand-subtitle {
-      margin: 16px auto 0;
-      color: #cbd5e1;
-      line-height: 1.6;
-      font-size: 16px;
-      max-width: 700px;
-    }
+    .brand-subtitle { margin: 16px auto 0; color: #cbd5e1; line-height: 1.6; font-size: 16px; max-width: 700px; }
+    .top-actions { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 
-    .top-actions {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .panel-wrapper {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      z-index: 1;
-    }
-
+    .panel-wrapper { position: relative; max-width: 1200px; margin: 0 auto; z-index: 1; }
     .panel-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
+      content: ""; position: absolute; inset: -4px;
       background: linear-gradient(135deg, var(--glow-purple), var(--glow-pink), rgba(59,130,246,0.3));
-      filter: blur(16px);
-      border-radius: 30px;
-      z-index: -1;
-      opacity: 0.8;
+      filter: blur(16px); border-radius: 30px; z-index: -1; opacity: 0.8;
     }
 
-    .app-shell {
-      background: var(--panel-light);
-      border-radius: var(--radius-lg);
-      padding: 30px;
-      color: var(--text-dark);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--text-dark);
-      margin: 10px 0 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #f1f5f9;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
+    .app-shell { background: var(--panel-light); border-radius: var(--radius-lg); padding: 30px; color: var(--text-dark); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .section-title { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; color: var(--text-dark); margin: 10px 0 20px; padding-bottom: 12px; border-bottom: 2px solid #f1f5f9; }
+    
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
     .full { grid-column: 1 / -1; }
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-md);
-      padding: 20px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-label);
-    }
-
-    input[type="text"], select, textarea {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
-      color: var(--text-dark);
-      padding: 14px 16px;
-      font-size: 15px;
-      outline: none;
-    }
-
-    textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+    .card { background: var(--card-bg); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-soft); }
+    label { display: block; margin-bottom: 10px; font-size: 15px; font-weight: 700; color: var(--text-label); }
     
+    input[type="text"], select, textarea { width: 100%; border-radius: 12px; border: 1px solid #cbd5e1; background: #ffffff; color: var(--text-dark); padding: 14px 16px; font-size: 15px; outline: none; }
+    textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
     .hint { margin-top: 10px; color: var(--text-muted); font-size: 13px; line-height: 1.5; }
 
-    /* UPLOAD AREA */
-    .upload-area {
-      border: 2px dashed var(--pink-border); background: var(--pink-bg); border-radius: 12px;
-      padding: 24px; text-align: center; cursor: pointer; color: #db2777; font-weight: 700;
-    }
-    .preview-box {
-      background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 10px;
-      position: relative; text-align: center;
-    }
+    /* Upload Area */
+    .upload-area { border: 2px dashed var(--pink-border); background: var(--pink-bg); border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; color: #db2777; font-weight: 700; }
+    .preview-box { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 10px; position: relative; text-align: center; }
     .preview-box img { max-width: 100%; max-height: 250px; border-radius: 8px; margin: 0 auto; display: block; }
-    .reset-btn {
-      position: absolute; top: -10px; right: -10px; background: #ef4444; color: white; border: none;
-      border-radius: 50%; width: 28px; height: 28px; cursor: pointer; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);
-    }
+    .reset-btn { position: absolute; top: -10px; right: -10px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3); }
 
     .row { display: flex; gap: 12px; flex-wrap: wrap; }
     .toggle { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 12px; border: 1px solid #cbd5e1; background: #ffffff; font-size: 14px; font-weight: 600; cursor: pointer; }
@@ -314,7 +209,6 @@
           <button class="btn-dark" style="margin-top: 10px; width: 100%" onclick="copyContent('negativePreview')">Copy Negative Prompt</button>
         </div>
         
-        <!-- Video 3 Scene Wrapper -->
         <div class="card full">
           <label>Veo 3 Mode - Video Prompts (3 Scene Monetization)</label>
           <div id="videoPreview" class="preview">Klik tombol Build AI Prompt untuk membuat skenario video...</div>
@@ -326,7 +220,7 @@
   </div>
 
   <script>
-    // 1. UPLOAD FOTO LOGIC
+    // 1. Upload Foto Preview
     const fileInput = document.getElementById('fileInput');
     const imagePreview = document.getElementById('imagePreview');
     const previewBox = document.getElementById('previewBox');
@@ -352,7 +246,7 @@
       uploadArea.classList.remove('hidden');
     });
 
-    // 2. DATA TEMA (Background & Text)
+    // 2. Data Tema untuk Background dan Teks Dinamis
     const themeData = {
       umroh: {
         bg: "in front of the Kaaba in Mecca, bright sunny day, cinematic depth of field, elegant atmosphere.",
@@ -376,7 +270,7 @@
       }
     };
 
-    // 3. REFRESH TEMA
+    // 3. Logic Ganti Tema dan Refresh
     function updateThemeLogic() {
       const selected = document.getElementById('themeSelect').value;
       document.getElementById('hookText').value = themeData[selected].hooks[0];
@@ -391,7 +285,7 @@
       document.getElementById(type + 'Text').value = array[nextIndex];
     }
 
-    // 4. BUILD PROMPT LOGIC
+    // 4. Logic Build AI Prompt Final
     function generateFinal() {
       const base = document.getElementById('basePrompt').value;
       const outfit = document.getElementById('outfitSelect').value;
@@ -402,18 +296,18 @@
       const hook = document.getElementById('hookText').value;
       const badge = document.getElementById('badgeText').value;
 
-      // Image Prompt
+      // Final Prompt (Image)
       const finalImage = `High CTR YouTube thumbnail photography. ${base}, ${outfit}, ${expression}. Background: ${bg} Subject is positioned on the left side, leaving empty negative space on the right side for text. Shot on 35mm lens, highly detailed, 8k, ultra-photorealistic. No text overlay, pure image only.`;
       
       document.getElementById('promptPreview').textContent = finalImage;
 
-      // Video Prompt (Veo 3 Mode)
+      // Final Prompt (Video Veo 3)
       const finalVideo = `SCENE 1 (HOOK):\nCinematic portrait, ${base}, ${outfit}, ${expression}. Background: ${bg} Smooth slow-motion push-in. No text.\n\nSCENE 2 (PROBLEM):\nCinematic portrait, ${base}, ${outfit}, looking slightly concerned. Background: ${bg} Subtle gimbal movement. No text.\n\nSCENE 3 (SOLUTION/CTA):\nCinematic portrait, ${base}, ${outfit}, pointing finger towards the camera confidently. Background: ${bg} Sharp focus. No text.`;
       
       document.getElementById('videoPreview').textContent = finalVideo;
     }
 
-    // 5. COPY LOGIC
+    // 5. Logic Tombol Copy
     function copyContent(elementId) {
       const text = document.getElementById(elementId).textContent;
       navigator.clipboard.writeText(text).then(() => {
@@ -423,3 +317,4 @@
   </script>
 </body>
 </html>
+
