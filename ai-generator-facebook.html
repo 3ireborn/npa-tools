@@ -3,55 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Generator Facebook - Prospek</title>
+<title>AI Facebook Prospek Generator - 3iReborn</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #001f3f, #003366); color: white; margin:0; padding:20px; }
-textarea, input, button, select { width:100%; max-width:700px; margin:10px auto; display:block; padding:12px; border-radius:10px; }
-button { background: linear-gradient(90deg, #00b4d8, #0077b6); color:white; font-weight:600; cursor:pointer; }
-button:hover { transform:scale(1.03); }
-.result { background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; margin:20px auto; max-width:700px; text-align:left; }
+body { 
+  font-family: 'Poppins', sans-serif; 
+  background: linear-gradient(135deg, #001f3f, #003366); 
+  color: white; 
+  margin:0; 
+  padding:20px; 
+}
+.container { max-width: 800px; margin: 0 auto; }
+h2 { text-align: center; margin-bottom: 10px; }
+textarea, input, select, button { 
+  width:100%; 
+  max-width:700px; 
+  margin:10px auto; 
+  display:block; 
+  padding:14px; 
+  border-radius:12px; 
+  border: none;
+}
+button { 
+  background: linear-gradient(90deg, #00b4d8, #0077b6); 
+  color:white; 
+  font-weight:700; 
+  font-size: 1.1rem;
+  cursor:pointer; 
+  margin-top: 20px;
+}
+button:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,180,216,0.4); }
+.result { 
+  background:rgba(255,255,255,0.1); 
+  padding:25px; 
+  border-radius:16px; 
+  margin:25px auto; 
+  max-width:700px; 
+  text-align:left; 
+  display: none;
+}
+.tab { display: none; }
+.tab.active { display: block; }
 </style>
 </head>
 <body>
-<h2>🧠 AI Generator Facebook - Cari Prospek</h2>
+<div class="container">
+  <h2>🧠 AI Facebook Prospek Generator</h2>
+  <p style="text-align:center; opacity:0.9;">Buat konten, targeting, & script penjualan otomatis</p>
 
-<input type="text" id="niche" placeholder="Niche / Produk (contoh: skincare, baju muslim, suplemen)">
-<textarea id="target" rows="3" placeholder="Deskripsikan target audience (contoh: ibu rumah tangga umur 25-40, minat kecantikan)"></textarea>
-<button onclick="generateFB()">🚀 Generate Semua</button>
+  <input type="text" id="produk" placeholder="Nama Produk / Jasa (contoh: Skincare Whitening)">
+  <textarea id="target" rows="3" placeholder="Target Audience (contoh: Ibu rumah tangga 25-40 tahun, minat kecantikan, income menengah)"></textarea>
+  
+  <button onclick="generateAll()">🚀 GENERATE SEMUA SEKALIGUS</button>
 
-<div id="result" class="result" style="display:none;"></div>
+  <div id="result" class="result">
+    <!-- Hasil akan muncul di sini -->
+  </div>
+
+  <a href="ai-tools.html" style="display:block; text-align:center; margin-top:20px; color:#00b4d8;">← Kembali ke Menu Utama</a>
+</div>
 
 <script>
-function generateFB() {
-  const niche = document.getElementById('niche').value;
-  const target = document.getElementById('target').value;
-  if (!niche) return alert('Masukkan niche/produk dulu!');
+function generateAll() {
+  const produk = document.getElementById('produk').value.trim();
+  const target = document.getElementById('target').value.trim() || "target umum";
 
-  document.getElementById('result').style.display = 'block';
-  document.getElementById('result').innerHTML = `
-    <h3>✅ Hasil untuk: ${niche}</h3>
-    <p><strong>1. Caption Iklan Menarik</strong><br>
-    "🔥 ${niche} Original Premium! Cocok banget buat ${target}. Sudah ribuan ibu puas! Mau coba?"</p>
+  if (!produk) {
+    alert("⚠️ Masukkan nama produk/jasa dulu!");
+    return;
+  }
+
+  const resultDiv = document.getElementById('result');
+  resultDiv.style.display = 'block';
+  
+  resultDiv.innerHTML = `
+    <h3>✅ Hasil untuk: <strong>${produk}</strong></h3>
     
-    <p><strong>2. Ide Targeting Audience</strong><br>
-    • Interest: ${niche}, Beauty, Fashion<br>
-    • Usia: 24-45 tahun<br>
-    • Gender: Perempuan<br>
-    • Lokasi: Indonesia (semua kota besar)</p>
+    <h4>1. Caption Iklan Facebook (Paling Konversi)</h4>
+    <p><strong>Versi A (Emosional):</strong><br>
+    "Moms, cape liat jerawat & flek hitam setiap hari? 😔<br>
+    Sudah coba ratusan produk tapi gak ada hasil?<br>
+    <strong>${produk}</strong> sudah bantu 3.247+ ibu seperti kakak dapat kulit cerah glowing 💖<br>
+    Mau tau rahasianya? DM sekarang!"</p>
     
-    <p><strong>3. Script DM Prospek</strong><br>
-    "Hai kak, saya lihat kakak tertarik sama ${niche}. Ada yang bisa saya bantu? 😊"</p>
+    <h4>2. Ide Targeting Audience (Facebook Ads)</h4>
+    <ul>
+      <li><strong>Usia:</strong> 24 - 45 tahun</li>
+      <li><strong>Gender:</strong> Perempuan</li>
+      <li><strong>Interest:</strong> Skincare, Kecantikan, Beauty, Fashion, Ibu Rumah Tangga</li>
+      <li><strong>Behaviors:</strong> Engaged Shoppers, Online Buyers</li>
+      <li><strong>Lokasi:</strong> Indonesia (Jabodetabek, Jawa, Sumatra)</li>
+    </ul>
     
-    <p><strong>4. Ide Postingan</strong><br>
-    • Before-After<br>
-    • Testimoni<br>
-    • Flash Sale<br>
-    • Edukasi singkat</p>
+    <h4>3. Script DM / Chat Penjualan</h4>
+    <p><strong>Script 1 (Pembuka):</strong><br>
+    "Halo kak ${target.includes('ibu') ? 'Bu' : 'Kak'} 👋<br>
+    Terima kasih sudah lihat postingan ${produk} nya.<br>
+    Kakak lagi cari solusi untuk masalah apa nih?"</p>
+    
+    <p><strong>Script 2 (Closing):</strong><br>
+    "Kak, sekarang lagi ada promo spesial. Bisa kirim testimoni asli + cara order ya? 😊"</p>
+    
+    <h4>4. Ide Konten Carousel / Postingan</h4>
+    <ul>
+      <li>Slide 1: Masalah yang dialami target audience</li>
+      <li>Slide 2: Solusi dengan produk kamu</li>
+      <li>Slide 3: Testimoni + before after</li>
+      <li>Slide 4: Call To Action (DM / Link)</li>
+    </ul>
+    
+    <h4>5. Pertanyaan Kualifikasi Prospek</h4>
+    <p>1. Kakak sudah pernah pakai skincare sebelumnya?<br>
+    2. Masalah kulit kakak yang paling mengganggu apa?<br>
+    3. Budget kakak untuk skincare sebulan berapa?</p>
   `;
 }
 </script>
-
-<a href="ai-tools.html">← Kembali ke Menu Utama</a>
 </body>
 </html>
