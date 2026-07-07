@@ -92,16 +92,14 @@ button:hover {
     function cariDiFB() {
         var keyword = document.getElementById("keyword").value;
         
-        // Cek kalau kotaknya masih kosong
         if(keyword.trim() === "") {
             alert("Ndan, kata kuncinya diisi dulu dong sebelum di-scan! 😅");
             return;
         }
         
-        // Logika Nakal tapi Halal: Membuat Link Pintasan Pencarian Facebook
-        var fbSearchUrl = "https://www.facebook.com/search/posts/?q=" + encodeURIComponent(keyword);
+        // Logika yang sudah disempurnakan agar HP tidak bingung dan langsung menuju hasil pencarian Universal
+        var fbSearchUrl = "https://www.facebook.com/search/top/?q=" + encodeURIComponent(keyword);
         
-        // Otomatis membuka tab baru langsung ke hasil pencarian
         window.open(fbSearchUrl, '_blank');
     }
 </script>
