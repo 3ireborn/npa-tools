@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chat Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #001f3f, #003366); color: white; margin:0; padding:20px; }
+textarea, button { width:100%; max-width:700px; margin:10px auto; display:block; padding:12px; border-radius:10px; }
+button { background: linear-gradient(90deg, #00b4d8, #0077b6); color:white; font-weight:600; cursor:pointer; }
+.response { background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; margin:20px auto; max-width:700px; text-align:left; display:none; }
+</style>
+</head>
+<body>
+<h2>💬 AI Chat Generator</h2>
+<textarea id="prompt" rows="6" placeholder="Tulis pertanyaan atau perintah..."></textarea>
+<button onclick="generateChat()">🚀 Generate Jawaban</button>
+<div id="result" class="response"></div>
+<a href="ai-tools.html">← Kembali</a>
+
+<script>
+function generateChat() {
+  const prompt = document.getElementById('prompt').value;
+  if (!prompt) return alert('Masukkan prompt dulu!');
+  const result = document.getElementById('result');
+  result.style.display = 'block';
+  result.innerHTML = `<strong>Prompt:</strong> ${prompt}<br><br><strong>Jawaban AI:</strong><br>Ini versi demo. Di versi penuh akan terhubung ke AI untuk jawaban real-time.`;
+}
+</script>
+</body>
+</html>
