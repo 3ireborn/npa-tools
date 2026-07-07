@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konten AI Analyzer</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #001f3f, #003366); color: white; margin:0; padding:20px; }
+textarea, button { width:100%; max-width:700px; margin:10px auto; display:block; padding:12px; border-radius:10px; }
+button { background: linear-gradient(90deg, #00b4d8, #0077b6); color:white; font-weight:600; cursor:pointer; }
+.result { background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; margin:20px auto; max-width:700px; text-align:left; display:none; }
+</style>
+</head>
+<body>
+<h2>🧠 Konten AI Analyzer</h2>
+<textarea id="content" rows="8" placeholder="Paste caption / teks postingan di sini..."></textarea>
+<button onclick="analyzeContent()">Analisis Konten</button>
+<div id="result" class="result"></div>
+<a href="ai-tools.html">← Kembali</a>
+
+<script>
+function analyzeContent() {
+  const text = document.getElementById('content').value.trim();
+  if (!text) return alert('Masukkan teks dulu!');
+  document.getElementById('result').style.display = 'block';
+  document.getElementById('result').innerHTML = `<h3>Hasil Analisis:</h3><p>Panjang: ${text.length} karakter<br>Emosi: Positif<br>Saran: Tambahkan CTA yang kuat & emoji.</p>`;
+}
+</script>
+</body>
+</html>
