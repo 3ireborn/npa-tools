@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar Prospek FB - NPA Smart System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin: 0;
+}
+h2 {
+  font-size: 1.8rem;
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
+}
+p {
+  opacity: 0.85;
+  margin-bottom: 2rem;
+  font-size: 14px;
+}
+.search-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+input[type="text"] {
+  width: 90%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #000;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+.badge {
+  background: #ef4444;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="badge">🔥 NPA SMART TOOLS 🔥</div>
+<h2>Radar Kolam Prospek</h2>
+<p>Masukkan "Kata Kunci Panas" (Misal: <strong>korban phk</strong>, <strong>loker cikarang</strong>, <strong>butuh tambahan</strong>). Radar akan otomatis melacak target di Facebook!</p>
+
+<div class="search-box">
+    <input type="text" id="keyword" placeholder="Ketik kata kunci di sini..." required>
+    
+    <button onclick="cariDiFB()">🚀 SCAN TARGET!</button>
+</div>
+
+<p style="margin-top: 30px; font-size: 12px; color: #10b981;">Aman 100% | Hak Cipta NPA Smart System</p>
+
+<script>
+    function cariDiFB() {
+        var keyword = document.getElementById("keyword").value;
+        
+        // Cek kalau kotaknya masih kosong
+        if(keyword.trim() === "") {
+            alert("Ndan, kata kuncinya diisi dulu dong sebelum di-scan! 😅");
+            return;
+        }
+        
+        // Logika Nakal tapi Halal: Membuat Link Pintasan Pencarian Facebook
+        var fbSearchUrl = "https://www.facebook.com/search/posts/?q=" + encodeURIComponent(keyword);
+        
+        // Otomatis membuka tab baru langsung ke hasil pencarian
+        window.open(fbSearchUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
