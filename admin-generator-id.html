@@ -10,18 +10,17 @@
     <style>
         body { background-color: #0f172a; color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         
-        /* SUPER RIGID CONTAINER BIAR ANTI PENYOK / ANTI GENCET */
         .card-container {
             width: 600px;
             height: 350px;
-            min-width: 600px;
-            min-height: 350px;
             background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
             border: 2px solid #fbbf24;
             border-radius: 20px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+            /* Reset spasi font biar tidak tumpang tindih saat difoto */
+            letter-spacing: normal; 
         }
         
         .card-container::before {
@@ -63,7 +62,6 @@
             background-size: 20px 20px;
         }
 
-        /* Pembungkus untuk zoom out di layar HP */
         #scaleWrapper {
             transform-origin: top center;
             transition: transform 0.2s;
@@ -98,10 +96,9 @@
         </button>
     </div>
 
-    <!-- Preview Container (Mengecil Otomatis di HP, Tapi Kartu Asli Tetap Besar) -->
+    <!-- Preview Container -->
     <div class="w-full flex justify-center pb-10 overflow-hidden">
         <div id="scaleWrapper">
-            <!-- Kartu Asli yang Kaku/Rigid (Tidak Bisa Berubah Ukuran) -->
             <div id="vvipCard" class="card-container flex p-8 z-10 shrink-0">
                 <div class="pattern-bg z-0"></div>
                 
@@ -145,7 +142,6 @@
     </div>
 
     <script>
-        // Zoom-out kartu jika layar HP kecil, tapi ukuran DOM asli tetap 600x350
         function adjustScale() {
             const wrapper = document.getElementById('scaleWrapper');
             const screenWidth = window.innerWidth;
@@ -181,31 +177,48 @@
         }
 
         function downloadCard() {
-            const card = document.getElementById('vvipCard');
             const btn = document.querySelector('button');
             const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ Memproses HD...';
             
-            btn.innerHTML = '⏳ Sedang Memproses...';
+            const originalCard = document.getElementById('vvipCard');
             
-            // html2canvas mengambil elemen #vvipCard yang sudah dikunci min-width 600px
-            html2canvas(card, {
-                scale: 3, // Hasil kali 3 biar super HD (1800x1050)
-                backgroundColor: null,
-                useCORS: true
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `VVIP-Card-${document.getElementById('inputId').value || 'NPA'}.png`;
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-                
-                btn.innerHTML = '✅ Berhasil Diunduh!';
-                btn.classList.add('bg-green-500');
+            // TEKNIK NINJA: Duplikat kartu ke luar layar agar ukurannya 100% normal dan tidak penyok
+            const clone = originalCard.cloneNode(true);
+            clone.style.transform = 'none'; // Matikan efek mengecil
+            clone.style.position = 'absolute';
+            clone.style.top = '-9999px'; // Sembunyikan jauh dari pandangan
+            clone.style.left = '-9999px';
+            clone.style.margin = '0';
+            clone.style.width = '600px';
+            clone.style.height = '350px';
+            
+            document.body.appendChild(clone); // Tempel clone ke body secara gaib
 
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.remove('bg-green-500');
-                }, 3000);
-            });
+            // Tunggu 0.5 detik biar browser napas dulu merender font
+            setTimeout(() => {
+                html2canvas(clone, {
+                    scale: 3, // Super HD
+                    backgroundColor: null,
+                    useCORS: true,
+                    logging: false
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `VVIP-Card-${document.getElementById('inputId').value || 'NPA'}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    
+                    document.body.removeChild(clone); // Hapus jejak si Ninja
+                    
+                    btn.innerHTML = '✅ Sukses Diunduh!';
+                    btn.classList.add('bg-green-500');
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.remove('bg-green-500');
+                    }, 3000);
+                });
+            }, 500);
         }
     </script>
 </body>
