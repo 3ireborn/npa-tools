@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
     <style>
         body { background-color: #0f172a; color: white; font-family: 'Montserrat', sans-serif; }
+        
         .card-container {
             width: 600px;
             height: 350px;
@@ -18,8 +19,9 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+            transform-origin: top center;
         }
-        /* Efek cahaya emas di pojok */
+        
         .card-container::before {
             content: '';
             position: absolute;
@@ -36,11 +38,13 @@
             background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, transparent 70%);
             border-radius: 50%;
         }
+        
+        /* DIPERBAIKI: Menggunakan solid color dan shadow agar html2canvas tidak error */
         .gold-text {
-            background: linear-gradient(to right, #fbbf24, #fef08a, #d97706);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fbbf24;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 8px rgba(251, 191, 36, 0.4);
         }
+        
         .photo-frame {
             width: 130px; height: 130px;
             border-radius: 50%;
@@ -49,6 +53,7 @@
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
             background-color: #1e293b;
         }
+        
         .pattern-bg {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -56,17 +61,23 @@
             background-image: radial-gradient(#fbbf24 1px, transparent 1px);
             background-size: 20px 20px;
         }
+
+        #previewContainer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center py-10 px-4">
+<body class="min-h-screen flex flex-col items-center py-6 px-4">
 
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-yellow-400 mb-2">💳 Mesin Cetak ID Card VVIP</h1>
-        <p class="text-gray-400">NPA Smart System x 3iReborn</p>
+    <div class="text-center mb-6 mt-4">
+        <h1 class="text-2xl font-bold text-yellow-400 mb-1">💳 Mesin Cetak VVIP Card</h1>
+        <p class="text-gray-400 text-sm">Alat Khusus CEO NPA Smart System</p>
     </div>
 
     <!-- Form Input Panel -->
-    <div class="bg-slate-800 p-6 rounded-xl shadow-lg w-full max-w-xl mb-10 border border-slate-700">
+    <div class="bg-slate-800 p-5 rounded-xl shadow-lg w-full max-w-xl mb-8 border border-slate-700">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
                 <label class="block text-sm text-gray-300 mb-1">Nama Mitra</label>
@@ -81,14 +92,14 @@
             <label class="block text-sm text-gray-300 mb-1">Upload Foto Terganteng</label>
             <input type="file" id="inputPhoto" accept="image/*" class="w-full bg-slate-900 border border-slate-600 rounded p-2 text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-yellow-400 file:text-slate-900 hover:file:bg-yellow-500" onchange="loadPhoto(event)">
         </div>
-        <button onclick="downloadCard()" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-bold py-3 rounded-lg shadow-lg transform transition hover:scale-105 flex items-center justify-center gap-2">
+        <button onclick="downloadCard()" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-bold py-3 rounded-lg shadow-lg transform transition active:scale-95 flex items-center justify-center gap-2">
             <span>📥 Download Kartu VVIP Sekarang</span>
         </button>
     </div>
 
-    <!-- Preview Kartu yang akan di-Download -->
-    <div class="overflow-x-auto w-full flex justify-center pb-10">
-        <div id="vvipCard" class="card-container flex p-8 z-10 shrink-0">
+    <!-- Preview Container responsif untuk Layar HP -->
+    <div id="previewContainer" class="pb-10">
+        <div id="vvipCard" class="card-container flex p-8 z-10">
             <div class="pattern-bg z-0"></div>
             
             <!-- Left Side: Photo -->
@@ -112,7 +123,7 @@
                     </div>
                 </div>
 
-                <h1 class="gold-text font-black text-3xl mb-1 truncate" id="cardName" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">NAMA MITRA</h1>
+                <h1 class="gold-text font-black text-3xl mb-1 truncate" id="cardName">NAMA MITRA</h1>
                 <p class="text-gray-300 font-mono tracking-widest text-lg mb-6" id="cardId">ID: NPA-XXX</p>
 
                 <div class="border-t border-slate-600 pt-3 flex justify-between items-end">
@@ -130,6 +141,27 @@
     </div>
 
     <script>
+        // FUNGSI BARU: Membuat kartu responsif di layar HP
+        function adjustScale() {
+            const card = document.getElementById('vvipCard');
+            const container = document.getElementById('previewContainer');
+            const screenWidth = window.innerWidth;
+            
+            // Jika layar HP lebih kecil dari kartu
+            if (screenWidth < 640) {
+                const scaleValue = (screenWidth - 30) / 600; // 30px untuk margin
+                card.style.transform = `scale(${scaleValue})`;
+                container.style.height = `${350 * scaleValue}px`; // Sesuaikan tinggi container
+            } else {
+                card.style.transform = 'scale(1)';
+                container.style.height = '350px';
+            }
+        }
+
+        // Jalankan saat web dibuka dan saat layar dirotasi
+        window.onload = adjustScale;
+        window.addEventListener('resize', adjustScale);
+
         function updateCard() {
             document.getElementById('cardName').innerText = document.getElementById('inputName').value || 'NAMA MITRA';
             const idVal = document.getElementById('inputId').value;
@@ -153,23 +185,32 @@
             
             btn.innerHTML = '⏳ Sedang Memproses...';
             
-            html2canvas(card, {
-                scale: 3, // Kualitas HD
-                backgroundColor: null,
-                useCORS: true
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `VVIP-Card-${document.getElementById('inputId').value || 'NPA'}.png`;
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-                
-                btn.innerHTML = '✅ Berhasil Diunduh!';
-                btn.classList.add('bg-green-500');
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.remove('bg-green-500');
-                }, 3000);
-            });
+            // Kembalikan ukuran ke asli sebelum difoto agar HD
+            card.style.transform = 'scale(1)';
+
+            setTimeout(() => {
+                html2canvas(card, {
+                    scale: 3, // Resolusi tinggi
+                    backgroundColor: null,
+                    useCORS: true
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `VVIP-Card-${document.getElementById('inputId').value || 'NPA'}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    
+                    btn.innerHTML = '✅ Berhasil Diunduh!';
+                    btn.classList.add('bg-green-500');
+                    
+                    // Kecilkan lagi tampilannya untuk layar HP
+                    adjustScale();
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.remove('bg-green-500');
+                    }, 3000);
+                });
+            }, 100); // Beri jeda 0.1 detik agar CSS scale merespon
         }
     </script>
 </body>
