@@ -10,7 +10,6 @@
     <style>
         body { background-color: #0f172a; color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         
-        /* SUPER RIGID CONTAINER BIAR ANTI PENYOK / ANTI GENCET */
         .card-container {
             width: 600px;
             height: 350px;
@@ -65,8 +64,15 @@
 
         /* Pembungkus untuk zoom out di layar HP */
         #scaleWrapper {
-            transform-origin: top center;
-            transition: transform 0.2s;
+            transform-origin: top left;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        /* Pembungkus luar agar kartu tetap di tengah */
+        #flexWrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -99,7 +105,7 @@
     </div>
 
     <!-- Preview Container -->
-    <div class="w-full flex justify-center pb-10 overflow-hidden">
+    <div id="flexWrapper" class="pb-10 overflow-hidden">
         <div id="scaleWrapper">
             <!-- Kartu Asli -->
             <div id="vvipCard" class="card-container flex p-8 z-10 shrink-0">
@@ -126,7 +132,7 @@
                         </div>
                     </div>
 
-                    <!-- FIX: Buang truncate, tambah pb-2 (padding bawah) & line-height longgar agar bawah huruf tidak kepotong html2canvas -->
+                    <!-- Layout nama aman dari potongan -->
                     <h1 class="gold-text font-black text-[26px] leading-relaxed pb-2 whitespace-nowrap overflow-visible" id="cardName">NAMA MITRA</h1>
                     
                     <p class="text-gray-300 font-mono tracking-widest text-xl mb-6" id="cardId">ID: NPA-XXX</p>
@@ -138,7 +144,6 @@
                         </div>
                         <div class="text-right">
                             <p class="text-[9px] text-gray-500 mb-1">Founder & CEO</p>
-                            <!-- FIX: Tambah pb-1 agar bawah tulisan latin tidak kepotong -->
                             <p class="font-signature text-yellow-400 text-base pb-1" style="font-family: 'Playfair Display', serif;">Sugiarto Kurniawan</p>
                         </div>
                     </div>
@@ -149,16 +154,20 @@
 
     <script>
         function adjustScale() {
+            const flexWrapper = document.getElementById('flexWrapper');
             const wrapper = document.getElementById('scaleWrapper');
-            const screenWidth = window.innerWidth;
+            const cardWidth = 600;
+            const screenWidth = flexWrapper.clientWidth;
             
-            if (screenWidth < 640) {
-                const scaleValue = (screenWidth - 30) / 600; 
+            if (screenWidth < cardWidth) {
+                // Kalkulasi zoom out agar pas di HP
+                const scaleValue = screenWidth / cardWidth; 
                 wrapper.style.transform = `scale(${scaleValue})`;
-                wrapper.style.height = `${350 * scaleValue}px`; 
+                // Sesuaikan tinggi container luar agar tidak bolong
+                flexWrapper.style.height = `${350 * scaleValue}px`; 
             } else {
                 wrapper.style.transform = 'scale(1)';
-                wrapper.style.height = '350px';
+                flexWrapper.style.height = '350px';
             }
         }
 
@@ -184,19 +193,30 @@
 
         function downloadCard() {
             const card = document.getElementById('vvipCard');
+            const wrapper = document.getElementById('scaleWrapper');
             const btn = document.querySelector('button');
             const originalText = btn.innerHTML;
             
             btn.innerHTML = '⏳ Sedang Memproses...';
             
-            // FIX: Tambahkan setTimeout (Jeda) 500ms agar font termuat sempurna sebelum difoto
+            // 1. Simpan Skala HP Saat Ini
+            const currentTransform = wrapper.style.transform;
+            
+            // 2. PAKSA KEMBALI KE UKURAN ASLI (100%) AGAR KAMERA TIDAK MABUK
+            wrapper.style.transform = 'scale(1)';
+            
+            // 3. Beri jeda 100 milidetik agar browser me-render ulang ukuran aslinya
             setTimeout(() => {
                 html2canvas(card, {
-                    scale: 3, 
+                    scale: 3, // Hasil HD
                     backgroundColor: null,
                     useCORS: true,
                     logging: false
                 }).then(canvas => {
+                    // 4. KEMBALIKAN LAGI KE SKALA HP SECARA INSTAN
+                    wrapper.style.transform = currentTransform;
+
+                    // Mulai proses download
                     const link = document.createElement('a');
                     link.download = `VVIP-Card-${document.getElementById('inputId').value || 'NPA'}.png`;
                     link.href = canvas.toDataURL("image/png");
@@ -209,8 +229,13 @@
                         btn.innerHTML = originalText;
                         btn.classList.remove('bg-green-500');
                     }, 3000);
+                }).catch(err => {
+                    // Kalau error, pastikan tampilan HP tetap kembali mengecil
+                    wrapper.style.transform = currentTransform;
+                    console.error("Gagal cetak kartu:", err);
+                    alert("Gagal memproses gambar. Coba lagi.");
                 });
-            }, 500); 
+            }, 150); 
         }
     </script>
 </body>
