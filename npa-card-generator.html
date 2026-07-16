@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VVIP Card Generator - NPA Smart System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f172a; color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        
+        .card-container {
+            width: 600px;
+            height: 380px;
+            min-width: 600px;
+            min-height: 380px;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+            border: 1px solid #333;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 20px rgba(251, 191, 36, 0.1);
+        }
+
+        /* Ornamen Garis Emas Melengkung */
+        .gold-sweep {
+            position: absolute;
+            bottom: -80px;
+            right: -20px;
+            width: 400px;
+            height: 200px;
+            border-top: 6px solid #fbbf24;
+            border-radius: 50%;
+            transform: rotate(-20deg);
+            box-shadow: 0 -10px 30px rgba(251, 191, 36, 0.3);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        
+        /* Efek Lensa/Cahaya Emas */
+        .flare-top-left {
+            position: absolute;
+            top: 0; left: 0;
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(251,191,36,0.3) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .flare-bottom-right {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 250px; height: 250px;
+            background: radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Desain Chip */
+        .chip {
+            position: absolute;
+            left: 40px;
+            top: 150px;
+            width: 65px;
+            height: 50px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #fef08a 0%, #ca8a04 100%);
+            border: 1px solid #713f12;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.5);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 1px;
+            padding: 2px;
+        }
+        .chip div {
+            border: 1px solid rgba(113, 63, 18, 0.4);
+            border-radius: 2px;
+        }
+
+        /* Warna Silver untuk Subjudul */
+        .text-silver {
+            color: #cbd5e1; /* Slate 300 */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        /* Warna Gold dengan Efek Timbul (Emboss) untuk Nama & ID */
+        .gold-emboss {
+            color: #fbbf24; /* Amber 400 */
+            text-shadow: 
+                -1px -1px 0px #fef08a, /* Highlight atas/kiri */
+                1px 1px 0px #b45309,  /* Shadow dalam */
+                2px 2px 4px rgba(0,0,0,0.9), /* Shadow luar (drop) */
+                3px 3px 8px rgba(0,0,0,0.7);
+            letter-spacing: 2px;
+        }
+
+        #scaleWrapper {
+            transform-origin: top left;
+            transition: transform 0.1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-6 px-4">
+
+    <div class="text-center mb-6 mt-4">
+        <h1 class="text-2xl font-bold text-yellow-400 mb-1">💳 Mesin Cetak VVIP Card</h1>
+        <p class="text-gray-400 text-sm">Desain Eksklusif Black & Gold Emboss</p>
+    </div>
+
+    <!-- Form Input Panel -->
+    <div class="bg-slate-800 p-6 rounded-xl shadow-lg w-full max-w-xl mb-8 border border-slate-700">
+        <div class="grid grid-cols-1 gap-5 mb-6">
+            <div>
+                <label class="block text-sm font-bold text-yellow-500 mb-1">NAMA MEMBER</label>
+                <input type="text" id="inputName" placeholder="Contoh: YANDI IMANUEL" class="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white uppercase focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-500" oninput="updateCard()">
+            </div>
+            <div>
+                <label class="block text-sm font-bold text-yellow-500 mb-1">ID MEMBER / NOMOR WA</label>
+                <input type="text" id="inputId" placeholder="Contoh: 0123 4567 8900" class="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white uppercase focus:border-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-500" oninput="updateCard()">
+            </div>
+        </div>
+        <button onclick="downloadCard()" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-black py-4 rounded-xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-2 uppercase tracking-widest">
+            <span>📥 Cetak Kartu VVIP</span>
+        </button>
+    </div>
+
+    <!-- Preview Container -->
+    <div class="w-full flex justify-center pb-10 overflow-hidden">
+        <div id="flexWrapper" style="position: relative;">
+            <div id="scaleWrapper">
+                
+                <!-- KARTU ASLI -->
+                <div id="vvipCard" class="card-container p-8 z-10 shrink-0">
+                    <div class="flare-top-left"></div>
+                    <div class="flare-bottom-right"></div>
+                    <div class="gold-sweep"></div>
+                    
+                    <!-- Bagian Atas: Logo & Subjudul -->
+                    <div class="text-center relative z-20 mt-2">
+                        <div class="flex justify-center items-center gap-1">
+                            <h1 class="text-[50px] font-black tracking-tighter text-yellow-500" style="text-shadow: 0 4px 6px rgba(0,0,0,0.8);">NPA</h1>
+                            <!-- Panah kecil di atas A -->
+                            <div class="text-yellow-500 text-xl font-bold -mt-8 ml-[-15px] transform rotate-45">↗</div>
+                        </div>
+                        <h2 class="text-[14px] font-bold tracking-[0.3em] text-yellow-400 -mt-2 mb-1" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">SMART SYSTEM</h2>
+                        
+                        <!-- Subjudul Silver -->
+                        <h3 class="text-[9px] font-bold tracking-[0.2em] text-silver mb-2">NGANGGUR PRENEUR AKADEMI</h3>
+                        
+                        <div class="flex items-center justify-center gap-3">
+                            <div class="h-px w-16 bg-slate-500"></div>
+                            <p class="text-[8px] tracking-[0.15em] text-silver font-medium">SISTEM CERDAS • BISNIS BERKELAS • HASIL LUAR BIASA</p>
+                            <div class="h-px w-16 bg-slate-500"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bagian Tengah: Chip & VVIP Text -->
+                    <div class="chip z-20">
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                        <div></div><div></div><div></div>
+                    </div>
+
+                    <div class="absolute top-[165px] w-full left-0 text-center z-20">
+                        <div class="flex justify-center items-center gap-2 mb-1 text-yellow-500 text-sm">
+                            <span>★</span><span>★</span><span class="text-2xl">👑</span><span>★</span><span>★</span>
+                        </div>
+                        <h2 class="text-[42px] font-serif italic font-bold tracking-widest text-yellow-500" style="text-shadow: 2px 2px 5px rgba(0,0,0,1);">VVIP MEMBER</h2>
+                        <div class="flex justify-center items-center gap-2 mt-1 text-yellow-500 text-sm">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                    </div>
+
+                    <!-- Bagian Bawah: Nama & ID (Gold Emboss) -->
+                    <div class="absolute bottom-8 left-10 text-left z-30">
+                        <p class="text-[10px] font-bold tracking-widest text-yellow-600 mb-1">NAMA MEMBER</p>
+                        <p id="cardName" class="text-[26px] font-black uppercase mb-4 gold-emboss max-w-[400px] overflow-hidden whitespace-nowrap">NAMA MEMBER</p>
+                        
+                        <p class="text-[10px] font-bold tracking-widest text-yellow-600 mb-1">ID MEMBER</p>
+                        <p id="cardId" class="text-[22px] font-medium tracking-widest gold-emboss font-serif italic">0123 4567 8900</p>
+                    </div>
+
+                    <!-- Icon Globe/Laurel Kanan Bawah -->
+                    <div class="absolute bottom-8 right-10 z-20 text-yellow-500" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));">
+                        <svg width="65" height="65" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <!-- Globe -->
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <path d="M12 6c-1.5 2-1.5 6 0 12"></path>
+                            <path d="M12 6c1.5 2 1.5 6 0 12"></path>
+                            <path d="M6 12h12"></path>
+                            <!-- Daun/Wreath Kiri -->
+                            <path d="M3 18c0-3.5 1-6.5 2.5-9s3-4 5-5"></path>
+                            <path d="M3.5 15.5l-2-1"></path>
+                            <path d="M4.5 12.5l-2.5-1"></path>
+                            <path d="M6 10l-2-1.5"></path>
+                            <!-- Daun/Wreath Kanan -->
+                            <path d="M21 18c0-3.5-1-6.5-2.5-9s-3-4-5-5"></path>
+                            <path d="M20.5 15.5l2-1"></path>
+                            <path d="M19.5 12.5l2.5-1"></path>
+                            <path d="M18 10l2-1.5"></path>
+                            <!-- Pita Bawah -->
+                            <path d="M8 20l4-2 4 2"></path>
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function adjustScale() {
+            const flexWrapper = document.getElementById('flexWrapper');
+            const wrapper = document.getElementById('scaleWrapper');
+            const cardWidth = 600;
+            const cardHeight = 380;
+            
+            const screenWidth = window.innerWidth - 32; 
+            
+            if (screenWidth < cardWidth) {
+                const scaleValue = screenWidth / cardWidth; 
+                wrapper.style.transform = `scale(${scaleValue})`;
+                
+                flexWrapper.style.width = `${cardWidth * scaleValue}px`;
+                flexWrapper.style.height = `${cardHeight * scaleValue}px`; 
+            } else {
+                wrapper.style.transform = 'scale(1)';
+                flexWrapper.style.width = `${cardWidth}px`;
+                flexWrapper.style.height = `${cardHeight}px`;
+            }
+        }
+
+        window.onload = adjustScale;
+        window.addEventListener('resize', adjustScale);
+
+        function updateCard() {
+            const name = document.getElementById('inputName').value;
+            document.getElementById('cardName').innerText = name ? name : 'NAMA MEMBER';
+            
+            const idVal = document.getElementById('inputId').value;
+            document.getElementById('cardId').innerText = idVal ? idVal : '0123 4567 8900';
+        }
+
+        function downloadCard() {
+            const card = document.getElementById('vvipCard');
+            const wrapper = document.getElementById('scaleWrapper');
+            const btn = document.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '⏳ Sedang Memproses...';
+            
+            const currentTransform = wrapper.style.transform;
+            wrapper.style.transform = 'scale(1)';
+            
+            setTimeout(() => {
+                html2canvas(card, {
+                    scale: 3, 
+                    backgroundColor: "#000000",
+                    useCORS: true,
+                    logging: false
+                }).then(canvas => {
+                    wrapper.style.transform = currentTransform;
+
+                    const link = document.createElement('a');
+                    link.download = `VVIP-Member-${document.getElementById('inputName').value || 'NPA'}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                    
+                    btn.innerHTML = '✅ Berhasil Diunduh!';
+                    btn.classList.add('bg-emerald-500');
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.remove('bg-emerald-500');
+                    }, 3000);
+                }).catch(err => {
+                    wrapper.style.transform = currentTransform;
+                    console.error("Gagal cetak kartu:", err);
+                    alert("Gagal memproses gambar. Coba lagi.");
+                });
+            }, 150); 
+        }
+    </script>
+</body>
+  </html>
+  
